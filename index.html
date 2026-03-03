@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBUG - MFA Business Developer Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#d7b679',
+                            500: '#c5a363',
+                            600: '#a88c2c',
+                        },
+                        gray: {
+                            50: '#fafafa',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717',
+                        },
+                        graphite: {
+                            850: '#1a1a1a',
+                            900: '#121212',
+                            950: '#080808',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Plus Jakarta Sans', 'sans-serif'],
+                        accent: ['Cormorant Garamond', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(180deg, #0f0f0f 0%, #080808 100%);
+        }
+
+        .section-gradient-1 {
+            background: linear-gradient(180deg, #0d0d0d 0%, #080808 100%);
+        }
+
+        .section-gradient-2 {
+            background: radial-gradient(ellipse at center, #121212 0%, #080808 100%);
+        }
+
+        .section-gradient-3 {
+            background: linear-gradient(180deg, #080808 0%, #0d0d0d 100%);
+        }
+
+        .glass-card {
+            background: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 191, 36, 0.1);
+        }
+
+        .gold-border {
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.15);
+        }
+
+        .shadow-huge {
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+
+<body class="bg-[#080808] text-gray-100 antialiased selection:bg-gold-500/30 selection:text-gold-400">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-[#080808]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-gold-400 to-gold-600 rounded-lg flex items-center justify-center shadow-lg shadow-gold-400/20">
+                        <span class="text-graphite-900 font-bold">M</span>
+                    </div>
+                    <span class="text-sm font-bold text-white tracking-widest uppercase">MFA Business</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-8">
+                        <a href="#"
+                            class="text-xs font-medium text-white/50 hover:text-white transition-colors uppercase tracking-widest bg-white/5 px-4 py-2 rounded-full border border-white/10">Home</a>
+                        <a href="#metodo"
+                            class="text-xs font-medium text-white/50 hover:text-white transition-colors uppercase tracking-widest">Como
+                            funciona</a>
+                        <a href="#servicos"
+                            class="text-xs font-medium text-white/50 hover:text-white transition-colors uppercase tracking-widest">Serviços</a>
+                        <a href="#contato"
+                            class="text-xs font-medium text-white/50 hover:text-white transition-colors uppercase tracking-widest">Contato</a>
+                        <a href="#contato"
+                            class="ml-4 px-6 py-3 bg-gold-400 text-graphite-950 hover:bg-gold-500 transition-all duration-300 text-xs font-bold uppercase tracking-widest rounded-lg shadow-lg shadow-gold-400/20">Cadastre
+                            seu Projeto</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                        class="text-gray-300 hover:text-white">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#080808] border-b border-white/5">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#" class="text-white block px-3 py-2 text-base">Home</a>
+                <a href="#metodo" class="text-gray-400 block px-3 py-2 text-base">Como funciona</a>
+                <a href="#servicos" class="text-gray-400 block px-3 py-2 text-base">Serviços</a>
+                <a href="#contato"
+                    class="text-gold-400 block px-4 py-3 text-base font-bold bg-white/5 rounded-lg mt-4">Cadastre seu
+                    Projeto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <main id="home-v2" class="relative min-h-screen bg-[#0a0a0a] pt-32 pb-24 overflow-hidden">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+
+            <!-- GRID PRINCIPAL -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Hero Content (Left) -->
+                <div class="flex flex-col space-y-10">
+
+                    <div
+                        class="inline-flex items-center space-x-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full w-fit">
+                        <div class="w-2 h-2 bg-gold-400 rounded-full animate-pulse"></div>
+                        <span class="text-[11px] text-white/90 uppercase tracking-[0.2em] font-semibold">
+                            Business Development • Estruturação • Capital
+                        </span>
+                    </div>
+
+                    <div class="space-y-6">
+                        <h1 class="text-5xl md:text-7xl xl:text-8xl font-sans font-extrabold text-white leading-tight">
+                            Seu projeto pode gerar
+                            <span class="text-gold-400">resultado financeiro</span>.
+                            <span
+                                class="text-white/80 block mt-6 text-3xl md:text-4xl xl:text-5xl font-bold leading-snug">
+                                Nós estruturamos negócios para conectar ideias ao capital certo.
+                            </span>
+                        </h1>
+
+                        <p class="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+                            <b class="text-white font-bold">Business Developer</b> entre a ideia, o projeto e o mercado
+                            que investe.
+                            Sem estrutura, não há investimento. Sem método, não há resultado.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <a class="w-full sm:w-auto px-10 py-5 bg-gold-400 text-graphite-950 font-bold rounded-lg hover:bg-gold-500 transition-all text-center uppercase tracking-widest text-[11px] hover:scale-105"
+                            href="#contato">
+                            Cadastre seu Projeto Agora
+                        </a>
+                        <a class="w-full sm:w-auto px-10 py-5 border border-white/20 text-white font-bold rounded-lg hover:bg-white/5 transition-all text-center uppercase tracking-widest text-[11px] hover:scale-105"
+                            href="#metodo">
+                            Saiba Como Funciona
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Hero Media (Right) -->
+                <div class="relative">
+
+                    <div
+                        class="absolute -inset-10 bg-gold-400/5 rounded-full blur-[120px] pointer-events-none opacity-50">
+                    </div>
+
+                    <div
+                        class="relative aspect-[4/5] w-full max-w-lg mx-auto overflow-hidden rounded-[3rem] border border-white/10 shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1200"
+                            alt="Marcelo Alves"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+
+                        <div class="absolute bottom-8 left-8 right-8 z-20">
+                            <div
+                                class="bg-black/70 backdrop-blur-2xl border border-white/10 p-8 rounded-[2rem] shadow-2xl">
+                                <b class="text-white block text-xl mb-2 leading-tight">
+                                    Estruturamos projetos para gerar resultados financeiros.
+                                </b>
+                                <span class="text-white/60 text-sm leading-relaxed font-medium">
+                                    Business Development entre a ideia e o capital que faz acontecer.
+                                </span>
+                            </div>
+                        </div>
+
+                        <div
+                            class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MÉTRICAS EM LARGURA TOTAL -->
+            <div id="metrics-row-v2" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20">
+
+                <div
+                    class="bg-white/5 border border-white/10 p-10 rounded-3xl flex flex-col justify-center min-h-[160px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all">
+                    <div class="text-4xl font-sans font-bold text-white mb-2">
+                        <span class="text-gold-400">+30</span> anos
+                    </div>
+                    <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold">
+                        de mercado
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 border border-white/10 p-10 rounded-3xl flex flex-col justify-center min-h-[160px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all">
+                    <div class="text-4xl font-sans font-bold text-white mb-2">
+                        <span class="text-3xl font-accent font-bold text-gold-800 mb-4">+1.500</span>
+                    </div>
+                    <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold">
+                        negócios realizados
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white/5 border border-white/10 p-10 rounded-3xl flex flex-col justify-center min-h-[160px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all">
+                    <div class="text-4xl font-sans font-bold text-white mb-2">
+                        <span class="text-gold-400">+R$ 1 BI</span>
+                    </div>
+                    <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold italic">
+                        em negócios conectados
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+
+    </div>
+    </div>
+    </main>
+
+    <!-- Problem Section -->
+    <section class="relative py-24 bg-[#080808] section-gradient-1">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-8">
+                    90% dos projetos não chegam ao investidor.
+                </h2>
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mb-8">
+                </div>
+                <p class="text-xl text-gray-400">
+                    Não por falta de ideia.<br>
+                    <span class="text-white mt-4 block text-2xl">Por falta de <strong
+                            class="text-gold-400">estrutura</strong>, <strong class="text-gold-400">clareza
+                            financeira</strong> e <strong class="text-gold-400">posicionamento</strong>.</span>
+                </p>
+
+                <div
+                    class="mt-12 inline-flex items-center space-x-3 text-gold-400 border border-gold-400/30 px-6 py-3 rounded-full bg-gold-400/5">
+                    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+                    <span class="text-lg font-medium">É exatamente nesse ponto que a MFA Business Developer Hub
+                        atua.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section id="metodo" class="relative py-24 bg-[#080808] section-gradient-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+                    O mercado não conecta ideias. Conecta negócios estruturados.
+                </h2>
+                <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                    O método A + B + C organiza o caminho entre o projeto e o capital: estratégia, estrutura e narrativa
+                    de valor.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+                <!-- Connector Line -->
+                <div
+                    class="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-gold-400/20 via-gold-400/50 to-gold-400/20 transform -translate-y-1/2 z-0">
+                </div>
+
+                <!-- A -->
+                <div
+                    class="relative z-10 glass-card p-8 rounded-2xl border border-gray-800 hover:border-gold-400/30 transition-all duration-500 group">
+                    <div
+                        class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-graphite-900 border-2 border-gold-400 rounded-full flex items-center justify-center text-gold-400 font-accent font-bold text-2xl group-hover:scale-110 transition-transform">
+                        A</div>
+                    <div class="mt-6 text-center">
+                        <h3 class="text-xl font-sans font-bold text-white mb-4">Ideia / Projeto / Ativo</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Empresas, imóveis, startups, ativos, negócios em expansão.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- B -->
+                <div
+                    class="relative z-10 glass-card p-8 rounded-2xl border border-gold-400/50 bg-gradient-to-b from-gold-400/5 to-transparent transform lg:-translate-y-4">
+                    <div
+                        class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-gold-400 rounded-full flex items-center justify-center text-graphite-900 font-accent font-bold text-3xl shadow-lg shadow-gold-400/20">
+                        B</div>
+                    <div class="mt-8 text-center">
+                        <h3 class="text-2xl font-sans font-bold text-gold-400 mb-4">Business Developer (MFA)</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Estratégia, estrutura financeira, posicionamento, narrativa de valor.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gold-400/20">
+                            <span class="text-gold-400 text-sm font-medium uppercase tracking-wider">O B é o nosso
+                                trabalho.</span>
+                            <p class="text-gray-500 text-sm mt-2">Sem ele, a conexão entre A + C não acontece.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- C -->
+                <div
+                    class="relative z-10 glass-card p-8 rounded-2xl border border-gray-800 hover:border-gold-400/30 transition-all duration-500 group">
+                    <div
+                        class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-graphite-900 border-2 border-gold-400 rounded-full flex items-center justify-center text-gold-400 font-accent font-bold text-2xl group-hover:scale-110 transition-transform">
+                        C</div>
+                    <div class="mt-6 text-center">
+                        <h3 class="text-xl font-sans font-bold text-white mb-4">Capital / Investidores / Mercado</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Fundos, parceiros, investidores, compradores estratégicos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 text-center">
+                <p class="text-2xl font-serif text-white italic">
+                    <strong class="text-gold-400 not-italic">Estruturamos projetos para gerar resultados
+                        financeiros.</strong><br>
+                    <span class="text-gray-400 text-lg">Business Development entre a ideia e o capital que faz
+                        acontecer.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="relative py-24 bg-graphite-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-8 leading-tight">
+                        Para quem quer transformar projeto em ativo financeiro.
+                    </h2>
+                    <div class="w-20 h-1 bg-gold-400 mb-8"></div>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Se o seu projeto precisa virar negócio viável, você está no lugar certo.
+                    </p>
+                    <p class="text-gold-400 font-medium text-lg mb-6">Público</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 border border-gray-700/50">
+                        <i data-lucide="briefcase" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                        <span class="text-gray-300">Empresários</span>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 border border-gray-700/50">
+                        <i data-lucide="building" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                        <span class="text-gray-300">Donos de ativos</span>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 border border-gray-700/50">
+                        <i data-lucide="home" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                        <span class="text-gray-300">Projetos imobiliários</span>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 border border-gray-700/50">
+                        <i data-lucide="rocket" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                        <span class="text-gray-300">Startups</span>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 border border-gray-700/50">
+                        <i data-lucide="trending-up" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                        <span class="text-gray-300">Empresas em expansão</span>
+                    </div>
+                    <div class="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/30 border border-gray-700/50">
+                        <i data-lucide="handshake" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
+                        <span class="text-gray-300">Negócios que precisam de capital, parceiro ou saída
+                            estratégica</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section id="servicos" class="relative py-24 bg-graphite-950 section-gradient-3">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-8">
+                Somos estruturadores de negócios.
+            </h2>
+
+            <div class="space-y-4 text-lg text-gray-400 mb-12">
+                <p>Não vendemos promessa. Não fazemos intermediação rasa. Não conectamos projetos mal estruturados.</p>
+                <p class="text-2xl text-white font-serif">
+                    <strong class="text-gold-400">Nós organizamos, estruturamos e posicionamos</strong> o seu projeto
+                    para o mercado investidor.
+                </p>
+            </div>
+
+            <div class="p-8 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 gold-glow">
+                <p class="text-2xl md:text-3xl font-serif text-white leading-relaxed">
+                    Um método claro, em etapas, com começo, meio e fim.
+                </p>
+                <p class="mt-4 text-gold-400">
+                    Contratação progressiva, decisão consciente e total transparência em cada fase.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Pricing -->
+    <section id="etapas" class="relative py-24 bg-graphite-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Etapas do Processo</h2>
+                <div class="w-16 h-0.5 bg-gold-400 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div
+                    class="group relative bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-700 to-gray-600 group-hover:from-gold-400 group-hover:to-gold-600 transition-all">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Etapa 1</span>
+                            <i data-lucide="clipboard-list" class="h-5 w-5 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">INSCRIÇÃO E ANÁLISE</h3>
+                        <div class="text-3xl font-serif font-bold text-gold-400 mb-4">R$ 298</div>
+                        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Cadastro do projeto</li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Análise inicial de
+                                viabilidade</li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Enquadramento
+                                estratégico</li>
+                        </ul>
+                        <div class="pt-4 border-t border-gray-800">
+                            <p class="text-xs text-gray-500">
+                                🎁 <span class="text-gold-400">Cortesia:</span> E.book "Evoluir é a sua Marca"<br>
+                                Autor: <span class="text-white">Marcelo Alves</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div
+                    class="group relative bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-700 to-gray-600 group-hover:from-gold-400 group-hover:to-gold-600 transition-all">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Etapa 2</span>
+                            <i data-lucide="users" class="h-5 w-5 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">CONSULTORIA ESTRATÉGICA</h3>
+                        <div class="text-3xl font-serif font-bold text-gold-400 mb-4">R$ 3.700</div>
+                        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Reunião estratégica
+                                online</li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Apuração profunda do
+                                briefing</li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Diagnóstico de potencial
+                                financeiro</li>
+                        </ul>
+                        <div class="pt-4 border-t border-gray-800">
+                            <p class="text-xs text-gray-400">
+                                Com: <span class="text-white">Marcelo Ferreira Alves</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div
+                    class="group relative bg-gray-900 rounded-xl overflow-hidden border border-gold-400/20 hover:border-gold-400/50 transition-all duration-500 lg:scale-105 shadow-xl shadow-black/50">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gold-400"></div>
+                    <div class="absolute top-4 right-4">
+                        <span
+                            class="px-2 py-1 bg-gold-400/10 text-gold-400 text-xs rounded border border-gold-400/20">Essencial</span>
+                    </div>
+                    <div class="p-6 pt-12">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gold-400">Etapa 3</span>
+                            <i data-lucide="layers" class="h-5 w-5 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">ESTRUTURAÇÃO DO PROJETO</h3>
+                        <div class="text-3xl font-serif font-bold text-gold-400 mb-4">R$ 28.000</div>
+                        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Estrutura estratégica
+                            </li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Organização financeira
+                            </li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Apresentação comercial
+                            </li>
+                        </ul>
+                        <div class="pt-4 border-t border-gray-800">
+                            <p class="text-xs text-gold-400 font-medium">
+                                📌 Aqui o projeto vira ativo apresentável ao mercado.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div
+                    class="group relative bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-700 to-gray-600 group-hover:from-gold-400 group-hover:to-gold-600 transition-all">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Etapa 4</span>
+                            <i data-lucide="network" class="h-5 w-5 text-gold-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">CONEXÃO COM O MERCADO</h3>
+                        <div class="text-3xl font-serif font-bold text-gold-400 mb-4">R$ 4.600<span
+                                class="text-sm text-gray-500">/mês</span></div>
+                        <ul class="space-y-2 text-sm text-gray-400 mb-4">
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Prospecção estratégica
+                            </li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Networking qualificado
+                            </li>
+                            <li class="flex items-start"><i data-lucide="check"
+                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Apresentação para
+                                investidores</li>
+                        </ul>
+                        <div class="space-y-1 text-xs text-gray-500 border-t border-gray-800 pt-3">
+                            <p class="flex justify-between"><span>Retainer mensal:</span> <span class="text-white">R$
+                                    4.600</span></p>
+                            <p class="flex justify-between"><span>Mínimo:</span> <span class="text-white">3 meses</span>
+                            </p>
+                            <p class="flex justify-between"><span>Success Fee:</span> <span
+                                    class="text-gold-400">10%</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evolution Section -->
+            <div
+                class="mt-20 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 border border-gray-700">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-2">EVOLUÇÃO PROGRESSIVA DOS SERVIÇOS MFA</h3>
+                    <p class="text-gold-400 text-lg">Contratação progressiva. Decisão consciente. Total transparência.
+                    </p>
+                </div>
+
+                <div class="prose prose-invert max-w-none text-gray-400 space-y-4">
+                    <p>Na MFA Business Developer Hub, nenhuma etapa é automática ou imposta. Nosso método é progressivo,
+                        estruturado para que o cliente avance somente se fizer sentido técnico, estratégico e
+                        financeiro.</p>
+
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                            <h4 class="text-white font-bold mb-2 flex items-center">
+                                <i data-lucide="shield-check" class="h-5 w-5 text-gold-400 mr-2"></i>
+                                Etapa 1 — Avaliação e Diagnóstico
+                            </h4>
+                            <p class="text-sm">Caráter exclusivamente analítico. O projeto é cadastrado, analisado e
+                                avaliado para entender potencial, identificar gargalos e emitir parecer técnico.</p>
+                        </div>
+                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                            <h4 class="text-white font-bold mb-2 flex items-center">
+                                <i data-lucide="git-branch" class="h-5 w-5 text-gold-400 mr-2"></i>
+                                Etapas 2, 3 e 4
+                            </h4>
+                            <p class="text-sm">Só acontecem mediante viabilidade + concordância + aprovação formal etapa
+                                por etapa + novo contrato/aditivo aceito.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gold-400/5 border border-gold-400/20 rounded-lg p-6 mt-6">
+                        <p class="text-white font-medium mb-2">Importante:</p>
+                        <p class="text-sm">Não há contratação automática, não há obrigação de avançar, não há pacote
+                            fechado imposto. Segurança jurídica e ética: contratos claros, NDA, transparência total de
+                            valores/entregas e atuação ética e profissional.</p>
+                    </div>
+
+                    <p class="text-center text-xl font-serif text-white mt-8">
+                        <strong class="text-gold-400">Você só avança se fizer sentido para você.</strong><br>
+                        E nós só avançamos se o projeto tiver consistência.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="relative py-24 bg-graphite-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
+                    Confiança é a base de qualquer negócio.
+                </h2>
+                <p class="text-xl text-gray-400">Segurança, ética e proteção mútua de informações em todas as fases.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="text-center p-8 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-gold-400/30 transition-all duration-500 group">
+                    <div
+                        class="w-16 h-16 mx-auto mb-6 rounded-full bg-gold-400/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield" class="h-8 w-8 text-gold-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">NDA em todas as etapas</h3>
+                    <p class="text-gray-400">Confidencialidade aplicada do cadastro à conexão com o mercado.</p>
+                </div>
+
+                <div
+                    class="text-center p-8 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-gold-400/30 transition-all duration-500 group">
+                    <div
+                        class="w-16 h-16 mx-auto mb-6 rounded-full bg-gold-400/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="lock" class="h-8 w-8 text-gold-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Sigilo absoluto</h3>
+                    <p class="text-gray-400">Tratamento profissional das informações estratégicas do projeto.</p>
+                </div>
+
+                <div
+                    class="text-center p-8 rounded-2xl bg-gray-900/50 border border-gray-800 hover:border-gold-400/30 transition-all duration-500 group">
+                    <div
+                        class="w-16 h-16 mx-auto mb-6 rounded-full bg-gold-400/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="award" class="h-8 w-8 text-gold-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Ético e profissional</h3>
+                    <p class="text-gray-400">Regras claras, entregas definidas e transparência em cada etapa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="relative py-24 bg-graphite-900 section-gradient-1">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="relative">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-gold-400/20 to-transparent rounded-2xl transform translate-x-4 translate-y-4">
+                        </div>
+                        <img src="http://static.photos/office/640x360/42" alt="Marcelo Ferreira Alves"
+                            class="relative rounded-2xl shadow-2xl w-full grayscale hover:grayscale-0 transition-all duration-700 border border-gray-700">
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-graphite-900 border border-gold-400/30 p-6 rounded-xl shadow-xl">
+                            <p class="text-gold-400 font-serif text-3xl font-bold">+30</p>
+                            <p class="text-gray-400 text-sm">anos de experiência</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-2">
+                        Experiência que sustenta o método.
+                    </h2>
+                    <p class="text-gold-400 mb-8 uppercase tracking-wider text-sm">Autoridade prática. Histórico real.
+                        Resultados concretos.</p>
+
+                    <h3 class="text-2xl font-serif font-bold text-white mb-6">Marcelo Ferreira Alves</h3>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-300">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-gold-400 mr-3"></i>
+                            <strong class="text-white mr-1">+ 30 anos</strong> de mercado
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-gold-400 mr-3"></i>
+                            <strong class="text-white mr-1">+ 1.500</strong> negócios realizados
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-gold-400 mr-3"></i>
+                            <strong class="text-white mr-1">+ R$ 1 bilhão</strong> em negócios conectados
+                        </li>
+                        <li class="flex items-center text-gray-300">
+                            <i data-lucide="check-circle" class="h-5 w-5 text-gold-400 mr-3"></i>
+                            Atuação nacional e internacional
+                        </li>
+                    </ul>
+
+                    <p class="text-gray-400 text-lg border-l-2 border-gold-400 pl-6 italic">
+                        Estrutura, posicionamento e narrativa comercial para transformar projetos em ativos
+                        apresentáveis ao mercado.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Content Section -->
+    <section class="relative py-24 bg-graphite-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+                    Antes de investir, entenda como o mercado pensa.
+                </h2>
+                <div
+                    class="inline-flex items-center space-x-2 text-gold-400 bg-gold-400/10 px-4 py-2 rounded-full border border-gold-400/20">
+                    <i data-lucide="video" class="h-5 w-5"></i>
+                    <span>Vídeo exclusivo disponível após cadastro</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="group p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-gold-400/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="layout" class="h-6 w-6 text-gold-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Estruturação</h3>
+                    <p class="text-gray-400 text-sm">Como preparar um projeto para ser analisado e aceito pelo mercado.
+                    </p>
+                </div>
+
+                <div
+                    class="group p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-gold-400/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="message-circle" class="h-6 w-6 text-gold-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Narrativa de valor</h3>
+                    <p class="text-gray-400 text-sm">Como traduzir potencial em linguagem comercial e financeira.</p>
+                </div>
+
+                <div
+                    class="group p-6 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-gold-400/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="target" class="h-6 w-6 text-gold-400"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Critérios do investidor</h3>
+                    <p class="text-gray-400 text-sm">O que o investidor realmente busca ao decidir colocar capital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="relative py-24 bg-graphite-900 overflow-hidden">
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gold-400/10 via-transparent to-transparent">
+        </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight">
+                Seu projeto pode gerar resultado financeiro.<br>
+                <span class="text-gold-400">Mas precisa estar estruturado.</span>
+            </h2>
+            <p class="text-xl text-gray-400 mb-12">
+                Cadastre seu projeto e inicie a etapa de avaliação com segurança, clareza e método.
+            </p>
+            <a href="#contato"
+                class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-sm text-graphite-900 bg-gold-400 hover:bg-gold-500 transition-all duration-300 shadow-lg shadow-gold-400/25 hover:shadow-gold-400/40 transform hover:-translate-y-1">
+                <i data-lucide="arrow-right" class="h-5 w-5 mr-2"></i>
+                Cadastrar Projeto Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="relative py-24 bg-black border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-8">
+                        Contato / Cadastro
+                    </h2>
+                    <p class="text-gray-400 mb-8 text-lg">
+                        Cadastre seu projeto para iniciar a avaliação.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0 border border-gray-800">
+                                <i data-lucide="mail" class="h-6 w-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium mb-1">E-mail</h3>
+                                <a href="mailto:contato@mfa.hub.com.br"
+                                    class="text-gold-400 hover:text-gold-500 transition-colors">contato@mfa.hub.com.br</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0 border border-gray-800">
+                                <i data-lucide="message-circle" class="h-6 w-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium mb-1">Opção 1</h3>
+                                <p class="text-gray-400 text-sm">Botão para WhatsApp com mensagem pronta.</p>
+                                <button
+                                    class="mt-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded text-sm transition-colors flex items-center">
+                                    <i data-lucide="phone" class="h-4 w-4 mr-2"></i>
+                                    Abrir WhatsApp
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-12 h-12 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0 border border-gray-800">
+                                <i data-lucide="file-text" class="h-6 w-6 text-gold-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium mb-1">Opção 2</h3>
+                                <p class="text-gray-400 text-sm">Link para formulário externo (Typeform/Google Forms).
+                                </p>
+                                <button
+                                    class="mt-2 px-4 py-2 border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-graphite-900 rounded text-sm transition-all flex items-center">
+                                    <i data-lucide="external-link" class="h-4 w-4 mr-2"></i>
+                                    Acessar Formulário
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900/50 p-8 rounded-2xl border border-gray-800">
+                    <h3 class="text-xl font-bold text-white mb-6">Cadastre seu projeto</h3>
+                    <p class="text-gray-400 mb-6 text-sm">
+                        Aqui você pode inserir um formulário do Elementor (Form) ou linkar para WhatsApp/Typeform/Google
+                        Forms.
+                    </p>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Nome</label>
+                            <input type="text"
+                                class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
+                                placeholder="Seu nome completo">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">E-mail</label>
+                            <input type="email"
+                                class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
+                                placeholder="seu@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Tipo de Projeto</label>
+                            <select
+                                class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors">
+                                <option value="">Selecione...</option>
+                                <option value="empresa">Empresa</option>
+                                <option value="imovel">Projeto Imobiliário</option>
+                                <option value="startup">Startup</option>
+                                <option value="ativo">Ativo</option>
+                                <option value="expansao">Empresa em Expansão</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Descrição do Projeto</label>
+                            <textarea rows="4"
+                                class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors resize-none"
+                                placeholder="Descreva brevemente seu projeto..."></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-gold-400 hover:bg-gold-500 text-graphite-900 font-bold py-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                            Enviar Cadastro
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-2xl font-serif font-bold text-white tracking-wider">
+                        MFA<span class="text-gold-400">.</span>
+                    </span>
+                    <p class="text-gray-600 text-sm mt-2">Business Developer Hub</p>
+                </div>
+                <div class="text-gray-600 text-sm">
+                    © 2024 MFA Business Developer Hub. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
