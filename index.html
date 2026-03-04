@@ -226,33 +226,63 @@
             <!-- MÉTRICAS EM LARGURA TOTAL -->
             <div id="metrics-row-v2" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20">
 
+                <!-- Card 1: Experiência -->
                 <div
-                    class="bg-white/5 border border-white/10 p-10 rounded-3xl flex flex-col justify-center min-h-[160px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all">
-                    <div class="text-4xl font-sans font-bold text-white mb-2">
-                        <span class="text-gold-400">+30</span> anos
+                    class="group bg-white/5 border border-white/10 p-8 rounded-3xl flex flex-col justify-between min-h-[180px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity">
+                        <i data-lucide="history" class="w-32 h-32 text-white"></i>
                     </div>
-                    <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold">
-                        de mercado
+                    <div
+                        class="w-12 h-12 bg-gold-400/10 rounded-2xl flex items-center justify-center mb-4 border border-gold-400/20">
+                        <i data-lucide="history" class="w-6 h-6 text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-sans font-bold text-white mb-1">
+                            <span class="text-gold-400">+30</span> anos
+                        </div>
+                        <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold">
+                            de mercado e experiência
+                        </div>
                     </div>
                 </div>
 
+                <!-- Card 2: Negócios -->
                 <div
-                    class="bg-white/5 border border-white/10 p-10 rounded-3xl flex flex-col justify-center min-h-[160px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all">
-                    <div class="text-4xl font-sans font-bold text-white mb-2">
-                        <span class="text-gold-400">+1.500</span>
+                    class="group bg-white/5 border border-white/10 p-8 rounded-3xl flex flex-col justify-between min-h-[180px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity">
+                        <i data-lucide="briefcase" class="w-32 h-32 text-white"></i>
                     </div>
-                    <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold">
-                        negócios realizados
+                    <div
+                        class="w-12 h-12 bg-gold-400/10 rounded-2xl flex items-center justify-center mb-4 border border-gold-400/20">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-sans font-bold text-white mb-1">
+                            <span class="text-gold-400">+1.500</span>
+                        </div>
+                        <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold">
+                            negócios estruturados
+                        </div>
                     </div>
                 </div>
 
+                <!-- Card 3: Capital -->
                 <div
-                    class="bg-white/5 border border-white/10 p-10 rounded-3xl flex flex-col justify-center min-h-[160px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all">
-                    <div class="text-4xl font-sans font-bold text-white mb-2">
-                        <span class="text-gold-400">+R$ 1 BI</span>
+                    class="group bg-white/5 border border-white/10 p-8 rounded-3xl flex flex-col justify-between min-h-[180px] shadow-xl backdrop-blur-sm hover:bg-white/10 transition-all relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity">
+                        <i data-lucide="trending-up" class="w-32 h-32 text-white"></i>
                     </div>
-                    <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold italic">
-                        em negócios conectados
+                    <div
+                        class="w-12 h-12 bg-gold-400/10 rounded-2xl flex items-center justify-center mb-4 border border-gold-400/20">
+                        <i data-lucide="trending-up" class="w-6 h-6 text-gold-400"></i>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-sans font-bold text-white mb-1">
+                            <span class="text-gold-400">+R$ 1 BI</span>
+                        </div>
+                        <div class="text-[11px] text-white/40 uppercase tracking-[0.2em] font-bold italic">
+                            em negócios conectados
+                        </div>
                     </div>
                 </div>
 
@@ -517,15 +547,13 @@
 
                 <!-- Step 3 -->
                 <div
-                    class="group relative bg-gray-900 rounded-xl overflow-hidden border border-gold-400/20 hover:border-gold-400/50 transition-all duration-500 lg:scale-105 shadow-xl shadow-black/50">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gold-400"></div>
-                    <div class="absolute top-4 right-4">
-                        <span
-                            class="px-2 py-1 bg-gold-400/10 text-gold-400 text-xs rounded border border-gold-400/20">Essencial</span>
+                    class="group relative bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gold-400/30 transition-all duration-500">
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-700 to-gray-600 group-hover:from-gold-400 group-hover:to-gold-600 transition-all">
                     </div>
-                    <div class="p-6 pt-12">
+                    <div class="p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-bold uppercase tracking-wider text-gold-400">Etapa 3</span>
+                            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Etapa 3</span>
                             <i data-lucide="layers" class="h-5 w-5 text-gold-400"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-2">ESTRUTURAÇÃO DO PROJETO</h3>
@@ -542,7 +570,7 @@
                             </li>
                         </ul>
                         <div class="pt-4 border-t border-gray-800">
-                            <p class="text-xs text-gold-400 font-medium">
+                            <p class="text-xs text-gray-400">
                                 📌 Aqui o projeto vira ativo apresentável ao mercado.
                             </p>
                         </div>
