@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEBUG - MFA Business Developer Hub</title>
+    <title>MFA Business Developer Hub</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -110,6 +110,68 @@
 
         .shadow-huge {
             box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Marquee Animation for Portfolio */
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-250px * 10 - 2rem * 10));
+            }
+
+            /* Width * items + gap * items */
+        }
+
+        .slider {
+            background: transparent;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+            height: 350px;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .slider::before,
+        .slider::after {
+            background: linear-gradient(to right, rgba(8, 8, 8, 1) 0%, rgba(8, 8, 8, 0) 100%);
+            content: "";
+            height: 350px;
+            position: absolute;
+            width: 150px;
+            z-index: 2;
+        }
+
+        .slider::after {
+            right: 0;
+            top: 0;
+            transform: rotateZ(180deg);
+        }
+
+        .slider::before {
+            left: 0;
+            top: 0;
+        }
+
+        .slide-track {
+            animation: scroll 80s linear infinite;
+            display: flex;
+            width: calc(300px * 20 + 2rem * 20);
+            /* Double width for smooth loop */
+            gap: 2rem;
+        }
+
+        .slide-track:hover {
+            animation-play-state: paused;
+        }
+
+        .slide {
+            height: 350px;
+            width: 250px;
+            flex-shrink: 0;
         }
     </style>
 </head>
@@ -483,6 +545,190 @@
                         <i data-lucide="handshake" class="h-6 w-6 text-gold-400 flex-shrink-0 mt-1"></i>
                         <span class="text-gray-300">Negócios que precisam de capital, parceiro ou saída
                             estratégica</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Resultados Showcase -->
+    <section class="relative py-24 bg-[#080808] overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
+                Resultados que falam por si.
+            </h2>
+            <div class="w-20 h-0.5 bg-gold-400 mx-auto mb-6"></div>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Uma amostra das dezenas de eventos, negócios e lançamentos onde o método de
+                <strong class="text-gold-400">Business Development</strong> fez a diferença na captação e estruturação
+                do projeto.
+            </p>
+        </div>
+
+        <div class="slider mt-10">
+            <div class="slide-track">
+                <!-- Originais (10 imagens) -->
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (1).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (2).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (3).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (4).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (5).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (6).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (7).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (8).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (9).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (10).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+
+                <!-- Duplicatas para Infinito Scroll -->
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (1).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (2).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (3).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (4).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (5).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (6).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (7).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (8).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (9).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
+                    </div>
+                </div>
+                <div class="slide rounded-2xl overflow-hidden border border-white/10 group relative">
+                    <img src="./images/projetos/eventos (10).jpg"
+                        class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                        alt="MFA Projeto e Evento" />
+                    <div
+                        class="absolute inset-0 bg-gold-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-overlay">
                     </div>
                 </div>
             </div>
