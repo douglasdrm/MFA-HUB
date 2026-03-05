@@ -173,7 +173,40 @@
             width: 250px;
             flex-shrink: 0;
         }
+
+        /* Faz o carrossel parar quando o mouse está em cima para facilitar o clique */
+        .slider:hover .slide-track {
+            animation-play-state: paused;
+        }
+
+        .slide-track {
+            display: flex;
+            /* Ajuste o tempo da animação se achar que está rápido demais */
+            animation: scroll 40s linear infinite;
+            width: calc(300px * 20);
+            /* Largura baseada no tamanho do slide * total de fotos */
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-300px * 10));
+            }
+
+            /* Metade do total de fotos */
+        }
+
+        /* Garante que o modal do GLightbox tenha um fundo bem escuro e elegante */
+        .glightbox-container .gslide-description {
+            background: rgba(0, 0, 0, 0.8) !important;
+        }
     </style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
 </head>
 
 <body class="bg-[#080808] text-gray-100 antialiased selection:bg-gold-500/30 selection:text-gold-400">
@@ -567,289 +600,33 @@
         </div>
 
         <div class="slider mt-10">
-            <div class="slide-track">
-                <!-- Originais (10 imagens) -->
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (1).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 01" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 01</p>
+            <div class="slider mt-10">
+                <div class="slide-track">
+                    <script>
+                        // Gerando os slides via JS para o código ficar limpo e fácil de manter
+                        const totalImages = 10;
+                        const slideContent = (index) => `
+                <div class="slide w-[300px] aspect-square flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111] mx-2">
+                    <a href="./images/projetos/eventos (${index}).jpg" class="glightbox" data-gallery="eventos">
+                        <img src="./images/projetos/eventos (${index}).jpg" 
+                             class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110" 
+                             alt="MFA Projeto e Evento ${index}" />
+                        
+                        <div class="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-10 transition-all duration-500"></div>
+                        
+                        <div class="absolute bottom-0 left-0 right-0 p-4 z-10 pointer-events-none transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                            <div class="border-t border-white/20 pt-3">
+                                <p class="text-[10px] uppercase tracking-widest text-gold-400 font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity">Ver Projeto</p>
+                                <p class="text-sm font-medium text-white">Evento ${index.toString().padStart(2, '0')}</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (2).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 02" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 02</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (3).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 03" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 03</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (4).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 04" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 04</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (5).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 05" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 05</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (6).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 06" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 06</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (7).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 07" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 07</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (8).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 08" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 08</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (9).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 09" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 09</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (10).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 10" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 10</p>
-                        </div>
-                    </div>
-                </div>
+            `;
 
-                <!-- Duplicatas para Infinito Scroll -->
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (1).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 01" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 01</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (2).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 02" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 02</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (3).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 03" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 03</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (4).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 04" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 04</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (5).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 05" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 05</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (6).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 06" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 06</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (7).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 07" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 07</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (8).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 08" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 08</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (9).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 09" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 09</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="slide w-[420px] aspect-[16/9] flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111]"
-                    style="width: 420px; aspect-ratio: 16 / 9; height: auto;">
-                    <img src="./images/projetos/eventos (10).jpg"
-                        class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105"
-                        alt="MFA Projeto e Evento 10" />
-                    <div
-                        class="absolute inset-0 bg-black/50 opacity-60 group-hover:opacity-40 transition-all duration-500">
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
-                        <div class="border-t border-white/10 pt-3">
-                            <p class="text-sm font-medium tracking-wide text-white/85">Evento 10</p>
-                        </div>
-                    </div>
+                        // Renderiza as 10 originais + 10 duplicatas para o scroll infinito
+                        document.write(Array.from({ length: 20 }, (_, i) => slideContent((i % totalImages) + 1)).join(''));
+                    </script>
                 </div>
             </div>
         </div>
@@ -1380,6 +1157,16 @@
         // Initialize Lucide icons
         lucide.createIcons();
     </script>
+
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true
+        });
+    </script>
+
 </body>
 
 </html>
