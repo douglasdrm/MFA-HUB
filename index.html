@@ -1290,51 +1290,56 @@
                         Após envio do cadastro entraremos em contato via e-mail.
                     </p>
 
-                    <form class="space-y-4">
+                    <form id="form-contato" action="https://formsubmit.co/ajax/douglasdrm@gmail.com" method="POST"
+                        class="space-y-4">
+                        <input type="hidden" name="_subject" value="Novo Cadastro de Projeto - MFA Hub">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Nome</label>
-                            <input type="text"
+                            <input type="text" name="Nome" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="Seu nome completo">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">E-mail</label>
-                            <input type="email"
+                            <input type="email" name="Email" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="seu@email.com">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Telefone</label>
-                            <input type="tel"
+                            <input type="tel" name="Telefone" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="(00) 00000-0000">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Tipo de Projeto</label>
-                            <select
+                            <select name="Tipo de Projeto" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors">
                                 <option value="">Selecione...</option>
-                                <option value="empresa">Empresa</option>
-                                <option value="imovel">Projeto Imobiliário</option>
-                                <option value="startup">Startup</option>
-                                <option value="ativo">Ativo</option>
-                                <option value="expansao">Empresa em Expansão</option>
-                                <option value="outro">Outro</option>
+                                <option value="Empresa">Empresa</option>
+                                <option value="Imóvel">Projeto Imobiliário</option>
+                                <option value="Startup">Startup</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Expansão">Empresa em Expansão</option>
+                                <option value="Outro">Outro</option>
                             </select>
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Descrição do Projeto</label>
-                            <textarea rows="4"
+                            <textarea name="Descrição" rows="4" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors resize-none"
                                 placeholder="Descreva brevemente seu projeto..."></textarea>
                         </div>
 
-                        <button type="submit"
-                            class="w-full bg-gold-400 hover:bg-gold-500 text-graphite-900 font-bold py-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        <button type="submit" id="btn-submit"
+                            class="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold py-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
                             Enviar Cadastro
                         </button>
                     </form>
@@ -1391,6 +1396,56 @@
 
         // Inicializa ícones Lucide
         lucide.createIcons();
+
+        document.getElementById('form-contato').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('btn-submit');
+            const originalText = btn.innerHTML;
+
+            // Feedback visual de carregamento
+            btn.disabled = true;
+            btn.innerHTML = "Enviando...";
+            btn.style.opacity = "0.7";
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        btn.innerHTML = "✓ Enviado com Sucesso!";
+                        btn.style.backgroundColor = "#16a34a"; // Verde
+                        btn.style.color = "#ffffff";
+                        btn.style.opacity = "1";
+                        this.reset();
+                    } else {
+                        throw new Error();
+                    }
+                })
+                .catch(error => {
+                    btn.innerHTML = "Erro ao enviar. Tente novamente.";
+                    btn.style.backgroundColor = "#dc2626"; // Vermelho
+                    btn.style.color = "#ffffff";
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.innerHTML = originalText;
+                        btn.style.backgroundColor = "";
+                        btn.style.color = "";
+                        btn.style.opacity = "1";
+                    }, 5000);
+                });
+        });
+
     </script>
 
 </body>
