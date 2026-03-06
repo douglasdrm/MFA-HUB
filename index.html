@@ -214,6 +214,79 @@
                 opacity: 1 !important;
             }
         }
+
+        /* --- LEGENDA DENTRO DA IMAGEM (ESTILO ETIQUETA) --- */
+        .glightbox-container {
+            z-index: 99999 !important;
+        }
+
+        /* O segredo está aqui: alinhar o conteúdo interno e permitir posição absoluta */
+        .glightbox-clean .gslide-inner-content {
+            position: relative !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            background: transparent !important;
+        }
+
+        .glightbox-clean .gslide-description {
+            position: absolute !important;
+            /* Força a legenda a ficar NO CANTO DA FOTO */
+            bottom: 20px !important;
+            left: 20px !important;
+            right: auto !important;
+
+            /* Caixa compacta */
+            display: inline-flex !important;
+            width: auto !important;
+            max-width: 80% !important;
+
+            /* Estética */
+            background: rgba(0, 0, 0, 0.8) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px !important;
+            padding: 8px 14px !important;
+
+            transform: none !important;
+            margin: 0 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Garante que o texto apareça nítido */
+        .glightbox-clean .gslide-desc {
+            font-size: 14px !important;
+            color: #fff !important;
+            line-height: 1.2 !important;
+            font-weight: 500 !important;
+            display: block !important;
+            white-space: nowrap !important;
+        }
+
+        /* Remove a área preta padrão que fica fora da foto */
+        .glightbox-clean .gdesc-inner {
+            padding: 0 !important;
+        }
+
+        .glightbox-clean .gslide-title {
+            display: none !important;
+        }
+
+        /* Ajuste Mobile: se o texto for grande, permite quebrar linha para não sair da foto */
+        @media (max-width: 768px) {
+            .glightbox-clean .gslide-desc {
+                white-space: normal !important;
+                font-size: 12px !important;
+            }
+
+            .glightbox-clean .gslide-description {
+                bottom: 15px !important;
+                left: 15px !important;
+                max-width: 90% !important;
+            }
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
@@ -226,14 +299,16 @@
     <nav class="fixed top-0 w-full z-50 bg-[#080808]/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                <div class="flex items-center space-x-3">
-                    <div
-                        class="w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-600 rounded-xl flex items-center justify-center shadow-lg shadow-gold-400/20">
-                        <span class="text-graphite-900 font-bold text-lg font-brand tracking-widest pl-0.5">MFA</span>
-                    </div>
-                    <span
-                        class="text-base font-brand text-white tracking-wide max-w-[150px] sm:max-w-none leading-snug">Business
-                        Developer Hub</span>
+                <div class="flex items-center">
+                    <span class="font-brand text-4xl text-white tracking-tighter leading-none">
+                        MFA
+                    </span>
+
+                    <div class="h-8 w-[1.5px] bg-white/30 mx-5"></div>
+
+                    <span class="font-brand text-2xl text-white/90 leading-none tracking-tight">
+                        Business Developer Hub
+                    </span>
                 </div>
                 <div class="hidden md:block">
                     <div class="flex items-center space-x-8">
@@ -601,7 +676,6 @@
         </div>
     </section>
 
-    <!-- Portfolio / Resultados Showcase -->
     <section class="relative py-24 bg-[#080808] overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
             <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
@@ -610,41 +684,63 @@
             <div class="w-20 h-0.5 bg-gold-400 mx-auto mb-6"></div>
             <p class="text-lg text-gray-400 max-w-2xl mx-auto">
                 Uma amostra das dezenas de negócios onde o método de
-                <strong class="text-gold-400">Business developer</strong> fez a diferença na captação e estruturação
-                do projeto.
+                <strong class="text-gold-400">Business developer</strong> fez a diferença na captação e estruturação do
+                projeto.
             </p>
         </div>
 
         <div class="slider mt-10">
-            <div class="slide-track">
+            <div class="slide-track" id="portfolio-track">
                 <script>
-                    const totalImages = 26; // Agora são 26
-                    const extension = 'jpeg'; // Mudou para jpeg
+                    const projetos = {
+                        1: "Marketing Lançamento Empreendimento Saint Tropet",
+                        2: "Marketing Lançamento Empreendimento Santa Mônica Jardins",
+                        5: "Rio - Dubai Business Conection",
+                        6: "Rio - Dubai Business Conection",
+                        9: "Marketing Lançamento Península",
+                        10: "Marketing Lançamento Cidade Jardim",
+                        11: "Rio - Dubai Business Conection",
+                        12: "Marketing Lançamento Water Ways",
+                        13: "Marketing Lançamento Santa Mônica Jardins",
+                        14: "Gestão Pública Reveillon Rio de Janeiro",
+                        15: "Gestão Pública Reveillon Rio de Janeiro",
+                        16: "Gestão Pública Carnaval Rio de Janeiro",
+                        17: "Gestão Pública Carnaval Rio de Janeiro",
+                        18: "Gestão Pública Carnaval Rio de Janeiro",
+                        19: "Estrutura e Conexão Comercial Empreendimento Imobiliário",
+                        20: "Estrutura e Conexão Comercial Rio-Dubai Conection",
+                        21: "Estrutura e Conexão Comercial Arena Bangu Center",
+                        22: "Estrutura e Conexão Comercial Centro Médico Shopping",
+                        23: "Estrutura e Conexão Comercial Centro de Treinamento de Futebol Miami",
+                        24: "Estrutura e Conexão Comercial Retrofit Imobiliário",
+                        25: "Estrutura e Conexão Comercial Arena Bangu Center",
+                        26: "Estrutura e Conexão Comercial Arena Bangu Center"
+                    };
 
-                    const slideContent = (index) => `
-        <div class="slide w-[300px] aspect-square flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111] mx-2">
-            <a href="./images/projetos/eventos (${index}).${extension}" 
-               class="glightbox" 
-               data-gallery="eventos" 
-               data-draggable="true">
-                <img src="./images/projetos/eventos (${index}).${extension}" 
-                     class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110" 
-                     alt="MFA Projeto e Evento ${index}" />
-                
-                <div class="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-10 transition-all duration-500"></div>
-                
-                <div class="absolute bottom-0 left-0 right-0 p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                    <div class="border-t border-white/20 pt-3">
-                        <p class="text-[10px] uppercase tracking-widest text-gold-400 font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity">Ver Projeto</p>
-                        <p class="text-sm font-medium text-white">Evento ${index.toString().padStart(2, '0')}</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    `;
+                    const idsValidos = Object.keys(projetos);
+                    const extension = 'jpeg';
 
-                    // Ele gera automaticamente o dobro (52 itens) para o scroll não dar "pulo"
-                    document.write(Array.from({ length: totalImages * 2 }, (_, i) => slideContent((i % totalImages) + 1)).join(''));
+                    const slideContent = (id) => `
+                        <div class="slide w-[300px] aspect-square flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111] mx-2">
+                            <a href="./images/projetos/eventos (${id}).${extension}" 
+                               class="glightbox" 
+                               data-gallery="eventos" 
+                               data-description="${projetos[id]}">
+                                <img src="./images/projetos/eventos (${id}).${extension}" 
+                                     class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110" 
+                                     alt="${projetos[id]}" />
+                                <div class="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-10 transition-all duration-500"></div>
+                                <div class="absolute bottom-0 left-0 right-0 p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                    <div class="border-t border-white/20 pt-3">
+                                        <p class="text-[10px] uppercase tracking-widest text-gold-400 font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity">Ver Projeto</p>
+                                        <p class="text-sm font-medium text-white line-clamp-2">${projetos[id]}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+
+                    document.write(idsValidos.concat(idsValidos).map(id => slideContent(id)).join(''));
                 </script>
             </div>
         </div>
@@ -978,10 +1074,7 @@
                 <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
                     Antes de investir, entenda como o mercado pensa.
                 </h2>
-                <div
-                    class="inline-flex items-center space-x-2 text-gold-400 bg-gold-400/10 px-4 py-2 rounded-full border border-gold-400/20">
-                    <i data-lucide="video" class="h-5 w-5"></i>
-                </div>
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1065,12 +1158,14 @@
                             </div>
                         </div>
 
-                        <div class="flex items-start space-x-4">
+                        <div class="hidden flex items-start space-x-4">
+
                             <div
                                 class="w-12 h-12 rounded-lg bg-gray-900 flex items-center justify-center flex-shrink-0 border border-gray-800">
                                 <i data-lucide="message-circle" class="h-6 w-6 text-gold-400"></i>
                             </div>
-                            <div class="hidden">
+
+                            <div class="">
                                 <h3 class="text-white font-medium mb-1">Whatsapp</h3>
                                 <p class="text-gray-400 text-sm mb-3">Entre em contato direto com nossa equipe.</p>
                                 <a href="https://wa.me/5500000000000" target="_blank"
@@ -1100,9 +1195,16 @@
                 </div>
 
                 <div class="bg-gray-900/50 p-8 md:p-10 rounded-2xl border border-gray-800">
-                    <h3 class="text-3xl font-serif font-bold text-white mb-2">
-                        Cadastro de Projeto
-                    </h3>
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-4">
+                        <h3 class="text-3xl font-serif font-bold text-white">
+                            Cadastro de Projeto
+                        </h3>
+                        <span
+                            class="w-fit px-3 py-1 text-[10px] font-bold tracking-widest uppercase text-gold-400 border border-gold-400/30 rounded-md bg-gold-400/5 whitespace-nowrap">
+                            Fase de Seleção: Etapa 1
+                        </span>
+                    </div>
+
                     <p class="text-gray-400 mb-8 text-sm">
                         Após envio do cadastro entraremos em contato via e-mail.
                     </p>
@@ -1114,12 +1216,21 @@
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="Seu nome completo">
                         </div>
+
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">E-mail</label>
                             <input type="email"
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="seu@email.com">
                         </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Telefone</label>
+                            <input type="tel"
+                                class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
+                                placeholder="(00) 00000-0000">
+                        </div>
+
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Tipo de Projeto</label>
                             <select
@@ -1133,12 +1244,14 @@
                                 <option value="outro">Outro</option>
                             </select>
                         </div>
+
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Descrição do Projeto</label>
                             <textarea rows="4"
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors resize-none"
                                 placeholder="Descreva brevemente seu projeto..."></textarea>
                         </div>
+
                         <button type="submit"
                             class="w-full bg-gold-400 hover:bg-gold-500 text-graphite-900 font-bold py-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5">
                             Enviar Cadastro
@@ -1154,37 +1267,49 @@
     <footer class="bg-black border-t border-gray-900 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0 flex items-center space-x-4">
-                    <div
-                        class="w-16 h-16 bg-gradient-to-br from-gold-400 to-gold-600 rounded-2xl flex items-center justify-center shadow-lg shadow-gold-400/20">
-                        <span class="text-graphite-900 font-bold text-2xl font-brand tracking-widest pl-1">MFA</span>
-                    </div>
-                    <span
-                        class="text-xl font-brand text-white tracking-wide leading-snug max-w-[180px] sm:max-w-none">Business
-                        Developer Hub</span>
+                <div class="flex items-center">
+                    <span class="font-brand text-2xl text-white tracking-tighter leading-none">
+                        MFA
+                    </span>
+
+                    <div class="h-6 w-[1px] bg-white/20 mx-3"></div>
+
+                    <span class="font-brand text-base text-white/80 leading-none tracking-tight">
+                        Business Developer Hub
+                    </span>
                 </div>
                 <div class="text-gray-600 text-sm">
-                    © 2024 MFA Business Developer Hub. Todos os direitos reservados.
+                    © 2026 MFA Business Developer Hub. Todos os direitos reservados.
                 </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-    </script>
-
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script>
-        const lightbox = GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true, // Garante que funcione o "swipe" no celular
-            loop: true,
-            autoplayVideos: true,
-            zoomable: true,
-            draggable: true
+        // Inicialização única e limpa
+        window.addEventListener('load', function () {
+            const lightbox = GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                // Isso ajuda a manter a legenda grudada na foto
+                descPosition: 'bottom'
+            });
+
+            const track = document.getElementById('portfolio-track');
+
+            lightbox.on('open', () => {
+                if (track) track.style.animationPlayState = 'paused';
+            });
+
+            lightbox.on('close', () => {
+                if (track) track.style.animationPlayState = 'running';
+            });
         });
+
+        // Inicializa ícones Lucide
+        lucide.createIcons();
     </script>
 
 </body>
