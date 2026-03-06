@@ -1277,25 +1277,21 @@
 
                 <div class="bg-gray-900/50 p-8 md:p-10 rounded-2xl border border-gray-800">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-4">
-                        <h3 class="text-3xl font-serif font-bold text-white">
-                            Cadastro de Projeto
-                        </h3>
+                        <h3 class="text-3xl font-serif font-bold text-white">Cadastro de Projeto</h3>
                         <span
                             class="w-fit px-3 py-1 text-[10px] font-bold tracking-widest uppercase text-gold-400 border border-gold-400/30 rounded-md bg-gold-400/5 whitespace-nowrap">
                             Fase de Seleção: Etapa 1
                         </span>
                     </div>
 
-                    <p class="text-gray-400 mb-8 text-sm">
-                        Após envio do cadastro entraremos em contato via e-mail.
-                    </p>
+                    <p class="text-gray-400 mb-8 text-sm">Após envio do cadastro entraremos em contato via e-mail.</p>
 
                     <form id="form-contato" action="https://formsubmit.co/ajax/douglasdrm@gmail.com" method="POST"
                         class="space-y-4">
                         <input type="hidden" name="_subject" value="Novo Cadastro de Projeto - MFA Hub">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_captcha" value="false">
-
+                        <input type="text" name="_honey" style="display:none">
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Nome</label>
                             <input type="text" name="Nome" required
@@ -1372,14 +1368,13 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Inicialização única e limpa
         window.addEventListener('load', function () {
             const lightbox = GLightbox({
                 selector: '.glightbox',
                 touchNavigation: true,
                 loop: true,
-                // Isso ajuda a manter a legenda grudada na foto
                 descPosition: 'bottom'
             });
 
@@ -1394,7 +1389,6 @@
             });
         });
 
-        // Inicializa ícones Lucide
         lucide.createIcons();
 
         document.getElementById('form-contato').addEventListener('submit', function (e) {
@@ -1403,49 +1397,46 @@
             const btn = document.getElementById('btn-submit');
             const originalText = btn.innerHTML;
 
-            // Feedback visual de carregamento
             btn.disabled = true;
             btn.innerHTML = "Enviando...";
-            btn.style.opacity = "0.7";
-
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
 
             fetch(this.action, {
                 method: 'POST',
+                body: new FormData(this),
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
+                }
             })
                 .then(response => {
                     if (response.ok) {
-                        btn.innerHTML = "✓ Enviado com Sucesso!";
-                        btn.style.backgroundColor = "#16a34a"; // Verde
-                        btn.style.color = "#ffffff";
-                        btn.style.opacity = "1";
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'Cadastro enviado com sucesso.',
+                            icon: 'success',
+                            background: '#111',
+                            color: '#fff',
+                            confirmButtonColor: '#d7b679'
+                        });
                         this.reset();
                     } else {
                         throw new Error();
                     }
                 })
                 .catch(error => {
-                    btn.innerHTML = "Erro ao enviar. Tente novamente.";
-                    btn.style.backgroundColor = "#dc2626"; // Vermelho
-                    btn.style.color = "#ffffff";
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: 'Houve um problema ao enviar.',
+                        icon: 'error',
+                        background: '#111',
+                        color: '#fff',
+                        confirmButtonColor: '#dc2626'
+                    });
                 })
                 .finally(() => {
-                    setTimeout(() => {
-                        btn.disabled = false;
-                        btn.innerHTML = originalText;
-                        btn.style.backgroundColor = "";
-                        btn.style.color = "";
-                        btn.style.opacity = "1";
-                    }, 5000);
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
                 });
         });
-
     </script>
 
 </body>
