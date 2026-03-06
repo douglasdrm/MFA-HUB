@@ -287,6 +287,40 @@
                 max-width: 90% !important;
             }
         }
+
+        /* --- AJUSTES EXCLUSIVOS PARA MOBILE --- */
+        @media (max-width: 768px) {
+
+            /* 1. Força a legenda a ficar dentro da imagem no mobile */
+            .glightbox-mobile .glightbox-clean .gslide-description {
+                position: absolute !important;
+                bottom: 15px !important;
+                left: 15px !important;
+                right: auto !important;
+                top: auto !important;
+                /* Remove a posição padrão do mobile */
+                width: auto !important;
+                max-width: 85vw !important;
+                padding: 6px 12px !important;
+                background: rgba(0, 0, 0, 0.85) !important;
+                display: inline-flex !important;
+            }
+
+            .glightbox-mobile .glightbox-clean .gslide-desc {
+                white-space: normal !important;
+                /* Permite quebra de linha se o texto for longo */
+                font-size: 11px !important;
+                display: block !important;
+            }
+
+            /* 2. Força o Carrossel a rodar no Mobile */
+            .slide-track {
+                display: flex !important;
+                /* Garante que a animação seja interpretada mesmo em modo de economia de energia */
+                animation: scroll 40s linear infinite !important;
+                width: calc((260px + 16px) * 52) !important;
+            }
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
