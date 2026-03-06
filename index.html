@@ -321,6 +321,53 @@
                 width: calc((260px + 16px) * 52) !important;
             }
         }
+
+        @media (max-width: 768px) {
+
+            /* Força o hardware do telemóvel a manter a animação ativa */
+            .slide-track {
+                display: flex !important;
+                visibility: visible !important;
+                /* Reduzimos um pouco o tempo para 40s para ser mais fluido no ecrã pequeno */
+                animation: scroll 40s linear infinite !important;
+                /* Ativa a aceleração de GPU no telemóvel */
+                will-change: transform;
+                backface-visibility: hidden;
+                perspective: 1000;
+                -webkit-perspective: 1000;
+            }
+
+            /* Garante que o container não corte a animação */
+            .slider {
+                overflow: hidden !important;
+                touch-action: pan-y;
+                /* Permite scroll vertical mas não bloqueia o carrossel */
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Sequestra a legenda do modo mobile e coloca-a sobre a foto */
+            .glightbox-mobile .glightbox-clean .gslide-description {
+                position: absolute !important;
+                bottom: 10px !important;
+                left: 10px !important;
+                right: auto !important;
+                top: auto !important;
+                width: auto !important;
+                max-width: 85vw !important;
+                background: rgba(0, 0, 0, 0.85) !important;
+                padding: 5px 10px !important;
+                display: inline-flex !important;
+                z-index: 999999 !important;
+            }
+
+            .glightbox-mobile .glightbox-clean .gslide-desc {
+                font-size: 11px !important;
+                white-space: normal !important;
+                color: #fff !important;
+            }
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
