@@ -112,17 +112,14 @@
             box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9);
         }
 
-        /* Marquee Animation for Portfolio - Atualizado para 26 fotos */
         @keyframes scroll {
             0% {
                 transform: translateX(0);
             }
 
             100% {
-                transform: translateX(calc(-316px * 26));
+                transform: translateX(-50%);
             }
-
-            /* Move exatamente o equivalente a 26 fotos */
         }
 
         .slider {
@@ -160,14 +157,16 @@
             display: flex;
             animation: scroll 80s linear infinite;
             /* Velocidade ajustada para 26 fotos */
-            width: calc(316px * 52);
-            /* Largura total: (300px da foto + 16px de margem) * 52 slides */
+            width: max-content;
         }
 
-        /* Pausa a animação ao interagir */
-        .slider:hover .slide-track,
-        .slider:active .slide-track {
-            animation-play-state: paused;
+        /* Pausa a animação ao interagir (apenas p/ mouse, evita bugs no mobile) */
+        @media (hover: hover) {
+
+            .slider:hover .slide-track,
+            .slider:active .slide-track {
+                animation-play-state: paused;
+            }
         }
 
         .slide {
@@ -190,21 +189,6 @@
 
         /* Ajustes Responsivos para Mobile */
         @media (max-width: 768px) {
-            .slide {
-                width: 260px;
-                /* Reduz um pouco no celular */
-            }
-
-            /* Recalcula a animação para o tamanho menor do mobile */
-            @keyframes scroll {
-                0% {
-                    transform: translateX(0);
-                }
-
-                100% {
-                    transform: translateX(calc(-(260px + 16px) * 26));
-                }
-            }
 
             .slide img {
                 grayscale: 0 !important;
@@ -317,8 +301,8 @@
             .slide-track {
                 display: flex !important;
                 /* Garante que a animação seja interpretada mesmo em modo de economia de energia */
-                animation: scroll 40s linear infinite !important;
-                width: calc((260px + 16px) * 52) !important;
+                animation: scroll 80s linear infinite !important;
+                width: max-content !important;
             }
         }
 
@@ -328,8 +312,8 @@
             .slide-track {
                 display: flex !important;
                 visibility: visible !important;
-                /* Reduzimos um pouco o tempo para 40s para ser mais fluido no ecrã pequeno */
-                animation: scroll 40s linear infinite !important;
+                /* Velocidade de 80s para manter o padrão do desktop */
+                animation: scroll 80s linear infinite !important;
                 /* Ativa a aceleração de GPU no telemóvel */
                 will-change: transform;
                 backface-visibility: hidden;
@@ -802,19 +786,21 @@
                     const extension = 'jpeg';
 
                     const slideContent = (id) => `
-                        <div class="slide w-[300px] aspect-square flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111] mx-2">
+                        <div class="slide w-[260px] md:w-[300px] aspect-square flex-shrink-0 rounded-2xl overflow-hidden border border-white/10 group relative bg-[#111] mx-2 flex flex-col">
                             <a href="./images/projetos/eventos (${id}).${extension}" 
-                               class="glightbox" 
+                               class="glightbox w-full h-full flex flex-col" 
                                data-gallery="eventos" 
                                data-description="${projetos[id]}">
-                                <img src="./images/projetos/eventos (${id}).${extension}" 
-                                     class="w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110" 
-                                     alt="${projetos[id]}" />
-                                <div class="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-10 transition-all duration-500"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-4 z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                <div class="relative w-full flex-grow overflow-hidden">
+                                    <img src="./images/projetos/eventos (${id}).${extension}" 
+                                         class="absolute inset-0 w-full h-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-110" 
+                                         alt="${projetos[id]}" />
+                                    <div class="absolute inset-0 bg-black/40 opacity-60 group-hover:opacity-10 transition-all duration-500"></div>
+                                </div>
+                                <div class="w-full shrink-0 p-4 z-10 bg-[#111] transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                                     <div class="border-t border-white/20 pt-3">
                                         <p class="text-[10px] uppercase tracking-widest text-gold-400 font-bold mb-1 opacity-0 group-hover:opacity-100 transition-opacity">Ver Projeto</p>
-                                        <p class="text-sm font-medium text-white line-clamp-2">${projetos[id]}</p>
+                                        <p class="text-sm font-medium text-white line-clamp-2 min-h-[40px]">${projetos[id]}</p>
                                     </div>
                                 </div>
                             </a>
@@ -939,24 +925,35 @@
                             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Etapa 3</span>
                             <i data-lucide="layers" class="h-5 w-5 text-gold-400"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">ESTRUTURAÇÃO DO PROJETO</h3>
-                        <div class="text-3xl font-serif font-bold text-gold-400 mb-4">R$ 28.000</div>
+
+                        <h3 class="text-lg font-bold text-white mb-3">ESTRUTURAÇÃO DO PROJETO</h3>
+
+                        <div class="text-sm leading-relaxed font-medium text-gold-400/90 mb-6 italic">
+                            O investimento necessário para esta etapa 3 será definido e apresentado após a conclusão das
+                            etapas 1 e 2, considerando o nível de complexidade do projeto e os profissionais envolvidos
+                            no processo de estruturação.
+                        </div>
+
                         <ul class="space-y-2 text-sm text-gray-400 mb-6">
-                            <li class="flex items-start"><i data-lucide="check"
-                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Estrutura estratégica
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>
+                                Estrutura estratégica
                             </li>
-                            <li class="flex items-start"><i data-lucide="check"
-                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Organização financeira
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>
+                                Organização financeira
                             </li>
-                            <li class="flex items-start"><i data-lucide="check"
-                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Apresentação comercial
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>
+                                Apresentação comercial
                             </li>
                         </ul>
+
                         <div class="pt-4 border-t border-gray-800">
                             <p class="text-xs text-gray-400">
                                 <i data-lucide="pin"
-                                    class="h-4 w-4 text-gold-400 mr-1.5 inline-block -translate-y-0.5"></i> Aqui o
-                                projeto vira ativo apresentável ao mercado.
+                                    class="h-4 w-4 text-gold-400 mr-1.5 inline-block -translate-y-0.5"></i>
+                                Aqui o projeto vira ativo apresentável ao mercado.
                             </p>
                         </div>
                     </div>
@@ -973,27 +970,36 @@
                             <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Etapa 4</span>
                             <i data-lucide="network" class="h-5 w-5 text-gold-400"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white mb-2">CONEXÃO COM O MERCADO</h3>
-                        <div class="text-3xl font-serif font-bold text-gold-400 mb-4">R$ 4.600<span
-                                class="text-sm text-gray-500">/mês</span></div>
-                        <ul class="space-y-2 text-sm text-gray-400 mb-4">
-                            <li class="flex items-start"><i data-lucide="check"
-                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Prospecção estratégica
+
+                        <h3 class="text-lg font-bold text-white mb-3">CONEXÃO COM O MERCADO</h3>
+
+                        <div class="text-[13px] leading-relaxed font-medium text-gold-400/90 mb-6 italic">
+                            A remuneração desta etapa 4 será definida após a conclusão da etapa 3, considerando a
+                            complexidade do processo de desenvolvimento comercial. O modelo contempla remuneração mensal
+                            de acompanhamento comercial, com período mínimo de contratação de três meses, além de
+                            success fee de 10% sobre o investimento captado e efetivamente viabilizados por meio das
+                            conexões e estruturação comercial realizadas.
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-gray-400 mb-6">
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>
+                                Prospecção estratégica
                             </li>
-                            <li class="flex items-start"><i data-lucide="check"
-                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Networking qualificado
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>
+                                Networking qualificado
                             </li>
-                            <li class="flex items-start"><i data-lucide="check"
-                                    class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>Apresentação para
-                                investidores</li>
+                            <li class="flex items-start">
+                                <i data-lucide="check" class="h-4 w-4 text-gold-400 mr-2 mt-0.5 flex-shrink-0"></i>
+                                Apresentação para investidores
+                            </li>
                         </ul>
-                        <div class="space-y-1 text-xs text-gray-500 border-t border-gray-800 pt-3">
-                            <p class="flex justify-between"><span>Retainer mensal:</span> <span class="text-white">R$
-                                    4.600</span></p>
-                            <p class="flex justify-between"><span>Mínimo:</span> <span class="text-white">3 meses</span>
+
+                        <div class="pt-4 border-t border-gray-800">
+                            <p class="text-xs text-gray-500">
+                                Fase focada em viabilização e captação.
                             </p>
-                            <p class="flex justify-between"><span>Success Fee:</span> <span
-                                    class="text-gold-400">10%</span></p>
                         </div>
                     </div>
                 </div>
@@ -1008,35 +1014,76 @@
                     </p>
                 </div>
 
-                <div class="prose prose-invert max-w-none text-gray-400 space-y-4">
-                    <p>Na MFA Business Developer Hub, nenhuma etapa é automática ou imposta. Nosso método é progressivo,
-                        estruturado para que o cliente avance somente se fizer sentido técnico, estratégico e
-                        financeiro.</p>
+                <div class="prose prose-invert max-w-none text-gray-400 space-y-6">
+                    <p class="text-center md:text-left">Na MFA Business Developer Hub, nenhuma etapa é automática ou
+                        imposta. Nosso método é progressivo, estruturado para que o cliente avance somente se fizer
+                        sentido técnico, estratégico e financeiro.</p>
 
-                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="grid grid-cols-1 gap-6 mt-8">
+
                         <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
-                            <h4 class="text-white font-bold mb-2 flex items-center">
+                            <h4 class="text-white font-bold mb-3 flex items-center">
                                 <i data-lucide="shield-check" class="h-5 w-5 text-gold-400 mr-2"></i>
                                 Etapa 1 — Avaliação e Diagnóstico
                             </h4>
-                            <p class="text-sm">Caráter exclusivamente analítico. O projeto é cadastrado, analisado e
-                                avaliado para entender potencial, identificar gargalos e emitir parecer técnico.</p>
+                            <p class="text-sm leading-relaxed">Caráter exclusivamente analítico. O projeto é cadastrado,
+                                analisado e avaliado para entender potencial, identificar gargalos e emitir parecer
+                                técnico.</p>
                         </div>
+
                         <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
-                            <h4 class="text-white font-bold mb-2 flex items-center">
-                                <i data-lucide="git-branch" class="h-5 w-5 text-gold-400 mr-2"></i>
-                                Etapas 2, 3 e 4
+                            <h4 class="text-white font-bold mb-3 flex items-center">
+                                <i data-lucide="users" class="h-5 w-5 text-gold-400 mr-2"></i>
+                                Etapa 2 — Reunião de Alinhamento Estratégico
                             </h4>
-                            <p class="text-sm">Só acontecem mediante viabilidade + concordância + aprovação formal etapa
-                                por etapa + novo contrato/aditivo aceito.</p>
+                            <div class="text-sm leading-relaxed space-y-3">
+                                <p>Após a análise inicial, realizamos um encontro focado em promover um debate
+                                    estratégico sobre o briefing do projeto, permitindo compreender com maior clareza os
+                                    objetivos do negócio e os caminhos possíveis para sua estruturação.</p>
+                                <p>A partir desse alinhamento, avaliamos as bases necessárias para a evolução rumo ao
+                                    desenvolvimento do modelo de negócio.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                            <h4 class="text-white font-bold mb-3 flex items-center">
+                                <i data-lucide="layers" class="h-5 w-5 text-gold-400 mr-2"></i>
+                                Etapa 3 — Estruturação Estratégica do Projeto
+                            </h4>
+                            <div class="text-sm leading-relaxed">
+                                <p class="mb-3">Transformação da oportunidade em um modelo de negócio consistente e
+                                    atrativo para investidores. Inclui:</p>
+                                <ul class="grid md:grid-cols-2 gap-x-4 gap-y-1 list-none p-0">
+                                    <li class="flex items-center text-xs"><i data-lucide="check"
+                                            class="h-3 w-3 text-gold-400 mr-2"></i> Conceito e posicionamento</li>
+                                    <li class="flex items-center text-xs"><i data-lucide="check"
+                                            class="h-3 w-3 text-gold-400 mr-2"></i> Modelo de negócio</li>
+                                    <li class="flex items-center text-xs"><i data-lucide="check"
+                                            class="h-3 w-3 text-gold-400 mr-2"></i> Bases financeiras</li>
+                                    <li class="flex items-center text-xs"><i data-lucide="check"
+                                            class="h-3 w-3 text-gold-400 mr-2"></i> Parceiros estratégicos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                            <h4 class="text-white font-bold mb-3 flex items-center">
+                                <i data-lucide="network" class="h-5 w-5 text-gold-400 mr-2"></i>
+                                Etapa 4 — Desenvolvimento Comercial e Conexões
+                            </h4>
+                            <div class="text-sm leading-relaxed">
+                                <p>Foco na ativação comercial e viabilização por meio da aproximação com investidores e
+                                    operadores relevantes. Inclui o apoio direto nas negociações e estruturação de
+                                    parcerias necessárias para a execução do projeto.</p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bg-gold-400/5 border border-gold-400/20 rounded-lg p-6 mt-6">
                         <p class="text-white font-medium mb-2">Importante:</p>
-                        <p class="text-sm">Não há contratação automática, não há obrigação de avançar, não há pacote
-                            fechado imposto. Segurança jurídica e ética: contratos claros, NDA, transparência total de
-                            valores/entregas e atuação ética e profissional.</p>
+                        <p class="text-sm italic">Só acontecem mediante viabilidade + concordância + aprovação formal
+                            etapa por etapa + novo contrato/aditivo aceito. Não há contratação automática ou pacote
+                            fechado imposto.</p>
                     </div>
 
                     <p class="text-center text-xl font-serif text-white mt-8">
@@ -1286,40 +1333,39 @@
 
                     <p class="text-gray-400 mb-8 text-sm">Após envio do cadastro entraremos em contato via e-mail.</p>
 
-                    <form id="form-contato" action="https://formsubmit.co/ajax/douglasdrm@gmail.com" method="POST"
-                        class="space-y-4">
-                        <input type="hidden" name="_subject" value="Novo Cadastro de Projeto - MFA Hub">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="text" name="_honey" style="display:none">
+                    <form id="form-contato" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                        <input type="hidden" name="access_key" value="0261b84d-24c4-483d-aebc-dd6abb24d089">
+
+                        <input type="hidden" name="from_name" value="MFA BUSINESS HUB">
+                        <input type="hidden" name="subject" value="NOVA OPORTUNIDADE: SELEÇÃO ETAPA 1">
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Nome</label>
-                            <input type="text" name="Nome" required
+                            <input type="text" name="Lead: Nome Completo" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="Seu nome completo">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">E-mail</label>
-                            <input type="email" name="Email" required
+                            <input type="email" name="Contato: E-mail" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="seu@email.com">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-400 mb-2">Telefone</label>
-                            <input type="tel" name="Telefone" required
+                            <input type="tel" name="Contato: WhatsApp" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors"
                                 placeholder="(00) 00000-0000">
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-2">Tipo de Projeto</label>
-                            <select name="Tipo de Projeto" required
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Classificação do Ativo</label>
+                            <select name="Classificação do Ativo" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors">
                                 <option value="">Selecione...</option>
                                 <option value="Empresa">Empresa</option>
-                                <option value="Imóvel">Projeto Imobiliário</option>
+                                <option value="Imobiliário">Projeto Imobiliário</option>
                                 <option value="Startup">Startup</option>
                                 <option value="Ativo">Ativo</option>
                                 <option value="Expansão">Empresa em Expansão</option>
@@ -1328,8 +1374,8 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-400 mb-2">Descrição do Projeto</label>
-                            <textarea name="Descrição" rows="4" required
+                            <label class="block text-sm font-medium text-gray-400 mb-2">Resumo Executivo</label>
+                            <textarea name="Resumo Executivo" rows="4" required
                                 class="w-full bg-black border border-gray-800 rounded-lg px-4 py-3 text-white focus:border-gold-400 focus:outline-none transition-colors resize-none"
                                 placeholder="Descreva brevemente seu projeto..."></textarea>
                         </div>
@@ -1379,14 +1425,10 @@
             });
 
             const track = document.getElementById('portfolio-track');
-
-            lightbox.on('open', () => {
-                if (track) track.style.animationPlayState = 'paused';
-            });
-
-            lightbox.on('close', () => {
-                if (track) track.style.animationPlayState = 'running';
-            });
+            if (track) {
+                lightbox.on('open', () => track.style.animationPlayState = 'paused');
+                lightbox.on('close', () => track.style.animationPlayState = 'running');
+            }
         });
 
         lucide.createIcons();
@@ -1400,18 +1442,23 @@
             btn.disabled = true;
             btn.innerHTML = "Enviando...";
 
+            const formData = new FormData(this);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
             fetch(this.action, {
                 method: 'POST',
-                body: new FormData(this),
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
-                }
+                },
+                body: json
             })
-                .then(response => {
-                    if (response.ok) {
+                .then(async (response) => {
+                    if (response.status === 200) {
                         Swal.fire({
-                            title: 'Sucesso!',
-                            text: 'Cadastro enviado com sucesso.',
+                            title: 'Projeto Recebido!',
+                            text: 'A equipe MFA analisará seus dados e entrará em contato em breve.',
                             icon: 'success',
                             background: '#111',
                             color: '#fff',
@@ -1425,7 +1472,7 @@
                 .catch(error => {
                     Swal.fire({
                         title: 'Erro!',
-                        text: 'Houve um problema ao enviar.',
+                        text: 'Não foi possível enviar o cadastro agora.',
                         icon: 'error',
                         background: '#111',
                         color: '#fff',
